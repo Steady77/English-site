@@ -1,0 +1,366 @@
+@media(max-width: 1400px) {
+  .header__title{
+    padding-top: 125px;
+  }
+}
+
+@media(max-width: 1368px) {
+  .header{
+    background-attachment: scroll;
+  }
+}
+
+@media(max-width: 1176px) {
+  .for-who__inner{
+    grid-gap: 80px 100px;
+  }
+}
+
+@media(max-width: 1128px) {
+  .about__inner{
+    flex-wrap: wrap;
+  }
+  .about__img{
+    order: -1;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+  .about__content-title{
+    text-align: center;
+  }
+  .about__content{
+    flex-basis: 100%;
+  }
+}
+
+@media(max-width: 1024px) {
+  .header__top{
+    flex-wrap: wrap;
+  }
+  .header__social{
+    margin-left: 15px;
+  }
+  .header__title{
+    font-size: 40px;
+  }
+  .title{
+    margin-bottom: 50px;
+    font-size: 54px;
+    line-height: 64px;
+    letter-spacing: 18px;
+  }
+  .to-call{
+    padding: 80px 0;
+  }
+  .to-call__text{
+    font-size: 34px;
+    line-height: 50px;
+  }
+}
+
+@media(max-width: 996px) {
+  .menu{
+    margin-bottom: 15px;
+  }
+  .header__title{
+    padding-top: 80px;
+  }
+  .benefits__box{
+    margin: 15px 30px;
+  }
+  .contacts__form-title{
+    font-size: 24px;
+  }
+  .footer .menu{
+    display: none;
+  }
+  .footer__social{
+    margin: 0 auto;
+  }
+}
+
+@media(max-width: 830px) {
+  .contacts__form-img{
+    display: none;
+  }
+  .contacts__form{
+    margin: 0 auto;
+  }
+}
+
+@media(max-width: 768px) {
+  .section{
+    margin-bottom: 50px;
+  }
+  .for-who{
+    padding-bottom: 50px;
+  }
+  .menu{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+  }
+  .menu-btn{
+    display: none;
+    width: 40px;
+    height: 30px;
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    display: block;
+    padding: 0;
+    cursor: pointer;
+    top: 18px;
+    left: 10px;
+    z-index: 10;
+  }
+  .menu-btn.menu-btn--active span{
+    background-color: transparent;
+  }
+  .menu-btn.menu-btn--active span::before{
+    transform: rotate(-135deg);
+    top: 16px;
+  }
+  .menu-btn.menu-btn--active span::after{
+    transform: rotate(135deg);
+    bottom: 12px;
+  }
+  .menu-btn span{
+    display: block;
+    height: 2px;
+    background-color: $title;
+    width: 100%;
+  }
+  .menu-btn span::after,
+  .menu-btn span::before{
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: $title;
+    transition: all .2s;
+  }
+  .menu-btn span::before{
+    top: 0;
+    left: 0;
+  }
+  .menu-btn span::after{
+    bottom: 0;
+    left: 0;
+  }
+  .menu__list{
+    display: block;
+    width: 100%;
+    transform: translateY(-200%);
+    position: absolute;
+    transition: all .4s;
+  }
+  .menu__list.menu__list--active{
+    transform: translateY(-10%);
+    padding-top: 100px;
+    background-color: #fff;
+    position: absolute;
+    opacity: 0.95;
+    border-radius: 20px;
+    z-index: 5;
+  }
+  .menu__list-link{
+    padding: 15px 0;
+    width: 100%;
+  }
+  .menu__list-item + .menu__list-item{
+    margin-left: 0;
+  }
+  .header__social{
+    margin-left: auto;
+  }
+  .header__how-subtitle{
+    font-size: 28px;
+    line-height: 34px;
+    margin-bottom: 15px;
+  }
+  .header__title{
+    font-size: 38px;
+    line-height: 48px;
+    max-width: 590px;
+    padding-top: 90px;
+  }
+  .title{
+    font-size: 40px;
+    letter-spacing: 10px;
+    line-height: 48px;
+  }
+  .for-who__inner{
+    grid-gap: 50px 80px;
+  }
+  .for-who__item{
+    padding-top: 75px;
+  }
+  .to-call__text{
+    font-size: 30px;
+    line-height: 42px;
+  }
+}
+
+@media(max-width: 600px) {
+  .header__how-subtitle{
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 30px;
+  }
+  .header__title{
+    font-size: 34px;
+    line-height: 40px;
+    max-width: 500px;
+    padding-top: 80px;
+  }
+  .header__how-list{
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .header__how{
+    margin-bottom: 65px;
+  }
+  .header__how-item::before{
+    top: 0;
+  }
+  .header__how-item--mark--center::before{
+    top: -11px;
+  }
+  .header__how{
+    margin-bottom: 100px;
+  }
+  .title{
+    margin-bottom: 40px;
+  }
+  .about__img{
+    width: 300px;
+    height: 300px;
+  }
+  .swiper-button-prev::after,
+  .swiper-button-next::after{
+	  display: none;
+  }
+  .to-call__text{
+    font-size: 26px;
+    line-height: 36px;
+    font-weight: 700;
+  }
+}
+
+@media(max-width: 520px) {
+  .header__title{
+    text-align: center;
+    font-size: 28px;
+    line-height: 34px;
+  }
+  .header__social{
+    padding: 7px 11px;
+  }
+  .header__phone{
+    padding-left: 0;
+  }
+  .header__phone::before{
+    display: none;
+  }
+  .header__social-link{
+    margin-right: 20px;
+  }
+  .menu-btn{
+    top: 9px;
+    left: 5px;
+  }
+  .header{
+    background-position: 0;
+  }
+  .header__btn{
+    width: 280px;
+    margin: 0 auto;
+    display: block;
+  }
+  .title{
+    letter-spacing: 8px;
+    font-size: 34px;
+    line-height: 38px;
+  }
+  .benefits__box{
+    margin: 10px 0;
+    min-height: 320px;
+  }
+  .benefits__box-title{
+    margin-bottom: 10px;
+  }
+  .benefits__box-img{
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media(max-width: 440px) {
+  .about__content-title{
+    font-size: 18px;
+    line-height: 20px;
+  }
+  .about__img{
+    width: 250px;
+    height: 250px;
+  }
+  .title{
+    letter-spacing: 5px;
+    font-size: 32px;
+    line-height: 36px;
+  }
+  .about__content-subtitle {
+    font-size: 16px;
+    line-height: 19px;
+  }
+  .header{
+    margin-bottom: 50px;
+  }
+  .for-who__list{
+    grid-gap: 60px 120px;
+  }
+  .to-call__text{
+    font-size: 26px;
+    line-height: 36px;
+  }
+}
+
+@media(max-width: 375px) {
+  .header__social-link{
+    margin-right: 13px;
+  }
+  .header__phone{
+    font-size: 18px;
+  }
+  .header__title{
+    font-size: 24px;
+    line-height: 30px;
+  }
+  .header__how-list{
+    font-size: 16px;
+  }
+  .header__how-item{
+    padding-left: 22px;
+  }
+  .about__img{
+    width: 200px;
+    height: 200px;
+  }
+  .title{
+    letter-spacing: 4px;
+    font-size: 30px;
+    line-height: 34px;
+  }
+}
+
+@media(max-width: 350px) {
+ .header__social{
+    padding: 7px 5px;
+  }
+  .header__social-link{
+    margin-right: 8px;
+  }
+} 
+
+
