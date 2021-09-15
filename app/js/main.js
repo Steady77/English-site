@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         form.classList.remove('--sending');
       }
     } else {
-      alert('Заполните все поля поля');
+      alert('Заполните все поля');
     }
   }
 
