@@ -1,12 +1,9 @@
-@media(max-width: 1400px) {
-  .header__title{
-    padding-top: 125px;
-  }
-}
-
 @media(max-width: 1368px) {
   .header{
     background-attachment: scroll;
+  }
+  .header__how{
+    margin-bottom: 40px;
   }
 }
 
@@ -61,9 +58,6 @@
 @media(max-width: 996px) {
   .menu{
     margin-bottom: 15px;
-  }
-  .header__title{
-    padding-top: 80px;
   }
   .benefits__box{
     margin: 15px 30px;
@@ -168,6 +162,9 @@
     padding: 15px 0;
     width: 100%;
   }
+  .menu__list-link::after{
+    display: none;
+  }
   .menu__list-item + .menu__list-item{
     margin-left: 0;
   }
@@ -175,6 +172,9 @@
     font-size: 16px;
     padding: 9px 41px;
   }
+  // .header__btn-info{
+  //   font-size: 16px;
+  // }
   .header__social{
     margin-left: auto;
   }
@@ -187,7 +187,6 @@
     font-size: 38px;
     line-height: 48px;
     max-width: 590px;
-    padding-top: 90px;
   }
   .title{
     font-size: 40px;
@@ -216,14 +215,10 @@
     font-size: 34px;
     line-height: 40px;
     max-width: 500px;
-    padding-top: 80px;
   }
   .header__how-list{
     font-size: 18px;
     line-height: 22px;
-  }
-  .header__how{
-    margin-bottom: 65px;
   }
   .header__how-item::before{
     top: 0;
@@ -254,6 +249,7 @@
     text-align: center;
     font-size: 28px;
     line-height: 34px;
+    margin-bottom: 30px;
   }
   .header__social{
     padding: 7px 11px;
@@ -266,6 +262,10 @@
   }
   .header__social-link{
     margin-right: 20px;
+  }
+  .header__how{
+    margin-left: auto;
+    margin-right: auto;
   }
   .header__how-subtitle{
     text-align: center;

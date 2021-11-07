@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const menuButton = document.querySelector('.menu-btn');
   const menuList = document.querySelector('.menu__list');
-  const speed = 0.2; //Scroll Speed
   const menuLinks = document.querySelectorAll('.menu__list-link');
 
   if (menuButton) {
@@ -54,12 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Smoth scroll
 
+  const speed = 0.2; //Scroll Speed
+
   function scroll(event) {
     (event).preventDefault();
     let target = event.target;
 
     if (target.matches('.menu__list-link')) {
       let start = 0;
+
       const pageY = window.pageYOffset;
       const targetAttribute = target.getAttribute('href');
       const elemCoord = document.querySelector(targetAttribute).getBoundingClientRect().top;

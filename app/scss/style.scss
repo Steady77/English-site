@@ -9,13 +9,22 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 100vh;
+  // min-height: 100vh;
   background-attachment: fixed;
+  &__inner{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+  }
   &__top{
     display: flex;
     justify-content: space-between;
     padding: 15px 0;
     align-items: center;
+  }
+  &__content{
+    margin: auto 0;
   }
   &__social{
     display: flex;
@@ -60,7 +69,6 @@
     line-height: 61px;
     color: $title;
     max-width: 716px;
-    padding-top: 150px;
     margin-bottom: 50px;
     text-transform: uppercase;
   }
@@ -68,7 +76,7 @@
     max-width: 420px;
     font-weight: 700;
     color: $title;
-    margin-bottom: 90px;
+    margin-bottom: 50px;
   }
   &__how-subtitle{
     font-size: 32px;
@@ -101,6 +109,24 @@
   &__how-item--mark--center::before{
     top: -9px;
   }
+  // &__btn-wrapper{
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   width: 280px;
+  // }
+  // &__btn-info{
+  //   font-size: 18px;
+  //   font-weight: 600;
+  //   text-align: center;
+  //   max-width: 187px;
+  //   animation: UpDown 2s ease-in-out infinite alternate;
+  // }
+  // &__btn-arrow{
+  //   width: 22px;
+  //   height: 33px;
+  //   margin: 5px auto 20px;
+  // }
   &__btn{
     line-height: 20px;
     font-size: 18px;
@@ -114,7 +140,6 @@
     transition: all .4s;
     border: 1px solid transparent;
     white-space: nowrap;
-    margin-right: 10px;
     width: 280px;
     cursor: pointer;
   }
@@ -140,11 +165,26 @@
   &__list-link{
     padding-bottom: 5px;
     transition: all .4s;
-    border-bottom: 2px solid transparent;
+    position: relative;
+  }
+  &__list-link::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    height: 2px;
+    background-color: #FF8A00;
+    transition: all .4s;
   }
   &__list-link:hover{
-    border-bottom: 2px solid #FF8A00;
     color: #FF8A00;
+  }
+  &__list-link:hover::after{
+    width: 100%;
+    right: auto;
+    left: 0;
   }
 }
 
@@ -598,6 +638,15 @@
     opacity: 1;
   }
 }
+
+// @keyframes UpDown {
+//   0%{
+//     transform: translateY(7px);
+//   }
+//   100%{
+//     transform: translateY(-7px);
+//   }
+// }
 
 
 
