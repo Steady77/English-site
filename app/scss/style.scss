@@ -503,7 +503,7 @@
   z-index: 20;
   &--open{
     display: flex;
-    animation: showQuiz 0.5s ease forwards;
+    animation: show 0.5s ease forwards;
   }
   &--lock{
     overflow: hidden;
@@ -630,7 +630,38 @@
   }
 }
 
-@keyframes showQuiz {
+.modal{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  &--show{
+    display: flex;
+    animation: show 0.5s ease forwards;
+  }
+  &__content{
+    background-color: #fff;
+    text-align: center;
+    padding: 30px;
+    border-radius: 8px;
+  }
+  &__text{
+    max-width: 280px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+
+@keyframes show {
   0% {
     opacity: 0;
   }
