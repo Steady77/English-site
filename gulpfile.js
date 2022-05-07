@@ -7,6 +7,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const uglify = require('gulp-uglify-es').default;
 const imagemin = require('gulp-imagemin');
 const del = require('del');
+const webpack = require('webpack-stream');
 
 function browsersync() {
   browserSync.init({
@@ -21,13 +22,15 @@ function deleteDir() {
 }
 
 function scripts() {
-  return src([
-    'app/js/main.js',
-    'node_modules/swiper/swiper-bundle.js',
-    'node_modules/aos/dist/aos.js',
-  ])
-    .pipe(concat('main.min.js'))
-    .pipe(uglify())
+  return src(['app/js/main.js'])
+    .pipe(
+      webpack({
+        mode: 'production',
+        output: {
+          filename: 'main.min.js',
+        },
+      })
+    )
     .pipe(dest('app/js'))
     .pipe(browserSync.stream());
 }
