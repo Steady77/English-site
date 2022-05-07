@@ -1,5 +1,6 @@
 import AOS from 'aos';
 import { hideBurgerMenu, toggleBurgerMenu } from './burgerMenu';
+import { formSend } from './form';
 import { closeModal, openModal } from './modal';
 import { smoothScroll } from './smoothScroll';
 import { initSwiper } from './swiperSettings';
@@ -39,69 +40,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Form
-
-const form = document.getElementById('form');
-form.addEventListener('submit', formSend);
-
-async function formSend(e) {
-  e.preventDefault();
-
-  let error = formValidate(form);
-
-  let formData = new FormData(form);
-
-  if (error === 0) {
-    form.classList.add('--sending');
-    let response = await fetch('sendmail.php', {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (response.ok) {
-      let result = await response.json();
-      openModal(result.message);
-      form.reset();
-      form.classList.remove('--sending');
-    } else {
-      openModal('Ошибка. Попробуйте снова.');
-      form.classList.remove('--sending');
-    }
-  } else {
-    openModal('Заполните все поля');
-  }
-}
-
-function formValidate(form) {
-  let error = 0;
-  let formReq = document.querySelectorAll('.--req');
-
-  for (let index = 0; index < formReq.length; index++) {
-    const input = formReq[index];
-    formRemoveError(input);
-
-    if (input.classList.contains('contacts__form-input--email')) {
-      if (emailTest(input)) {
-        formAddError(input);
-        error++;
-      }
-    } else if (input.value === '') {
-      formAddError(input);
-      error++;
-    }
-  }
-  return error;
-}
-
-function formAddError(input) {
-  input.classList.add('--error');
-}
-function formRemoveError(input) {
-  input.classList.remove('--error');
-}
-function emailTest(input) {
-  return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(input.value);
-}
+UI_ELEMENTS.FORM.addEventListener('submit', formSend);
 
 // Quiz
 
