@@ -1,11 +1,14 @@
-import Swiper, { Navigation, Pagination } from 'swiper';
 import AOS from 'aos';
 import { hideBurgerMenu, toggleBurgerMenu } from './burgerMenu';
+import { smoothScroll } from './smoothScroll';
+import { initSwiper } from './swiperSettings';
 import { UI_ELEMENTS } from './view';
 
 AOS.init({
   once: true,
 });
+
+initSwiper();
 
 if (UI_ELEMENTS.MENU_BUTTON) {
   UI_ELEMENTS.MENU_BUTTON.addEventListener('click', toggleBurgerMenu);
@@ -18,67 +21,6 @@ document.body.addEventListener('click', (e) => {
     hideBurgerMenu();
   }
 });
-
-// Swiper settings
-
-const swiper = new Swiper('.swiper', {
-  modules: [Navigation, Pagination],
-  loop: true,
-  speed: 500,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    dynamicBullets: true,
-  },
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: true,
-  },
-});
-
-// Smooth scroll
-
-const SPEED = 0.2; // scroll speed
-
-function smoothScroll(event) {
-  event.preventDefault();
-
-  const target = event.target;
-
-  if (target.matches('.menu__list-link')) {
-    let start = 0;
-
-    const pageY = window.pageYOffset;
-    const targetAttribute = target.getAttribute('href');
-    const elemCoord = document
-      .querySelector(targetAttribute)
-      .getBoundingClientRect().top;
-
-    const step = (time) => {
-      if (!start) start = time;
-
-      const progress = time - start;
-
-      const r =
-        elemCoord < 0
-          ? Math.max(pageY - progress / SPEED, pageY + elemCoord)
-          : Math.min(pageY + progress / SPEED, pageY + elemCoord);
-
-      window.scrollTo(0, r);
-
-      if (r < pageY + elemCoord || r > pageY + elemCoord)
-        requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  }
-
-  hideBurgerMenu();
-}
 
 UI_ELEMENTS.MENU_LINKS.forEach((menuLink) => {
   menuLink.addEventListener('click', smoothScroll);
