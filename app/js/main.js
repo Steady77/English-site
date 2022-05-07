@@ -1,5 +1,6 @@
 import AOS from 'aos';
 import { hideBurgerMenu, toggleBurgerMenu } from './burgerMenu';
+import { closeModal, openModal } from './modal';
 import { smoothScroll } from './smoothScroll';
 import { initSwiper } from './swiperSettings';
 import { UI_ELEMENTS } from './view';
@@ -26,23 +27,7 @@ UI_ELEMENTS.MENU_LINKS.forEach((menuLink) => {
   menuLink.addEventListener('click', smoothScroll);
 });
 
-// Modal
-
-const modal = document.querySelector('.modal'),
-  modalText = modal.querySelector('.modal__text');
-
-function openModal(text) {
-  document.body.style.overflow = 'hidden';
-  modalText.textContent = text;
-  modal.classList.add('modal--show');
-}
-
-function closeModal() {
-  document.body.style.overflow = '';
-  modal.classList.remove('modal--show');
-}
-
-modal.addEventListener('click', (e) => {
+UI_ELEMENTS.MODAL_WINDOW.addEventListener('click', (e) => {
   if (e.target) {
     closeModal();
   }
