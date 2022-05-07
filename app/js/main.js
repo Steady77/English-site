@@ -1,7 +1,6 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-
   // Animation settings
 
   AOS.init({
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menuButton.addEventListener('click', toggleBurgerMenu);
   }
 
-  document.body.addEventListener('click', e => {
+  document.body.addEventListener('click', (e) => {
     const target = e.target;
 
     if (!target.closest('.menu')) {
@@ -50,12 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
-      dynamicBullets: true
+      dynamicBullets: true,
     },
     autoplay: {
       delay: 5000,
       disableOnInteraction: true,
-    }
+    },
   });
 
   // Smooth scroll
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const SPEED = 0.2; // scroll speed
 
   function smoothScroll(event) {
-    (event).preventDefault();
+    event.preventDefault();
 
     const target = event.target;
 
@@ -72,20 +71,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const pageY = window.pageYOffset;
       const targetAttribute = target.getAttribute('href');
-      const elemCoord = document.querySelector(targetAttribute).getBoundingClientRect().top;
+      const elemCoord = document
+        .querySelector(targetAttribute)
+        .getBoundingClientRect().top;
 
-      const step = time => {
+      const step = (time) => {
         if (!start) start = time;
 
         const progress = time - start;
 
-        const r = (elemCoord < 0 ?
-          Math.max(pageY - progress / SPEED, pageY + elemCoord) :
-          Math.min(pageY + progress / SPEED, pageY + elemCoord));
+        const r =
+          elemCoord < 0
+            ? Math.max(pageY - progress / SPEED, pageY + elemCoord)
+            : Math.min(pageY + progress / SPEED, pageY + elemCoord);
 
         window.scrollTo(0, r);
 
-        if (r < pageY + elemCoord || r > pageY + elemCoord) requestAnimationFrame(step);
+        if (r < pageY + elemCoord || r > pageY + elemCoord)
+          requestAnimationFrame(step);
       };
 
       requestAnimationFrame(step);
@@ -94,14 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
     hideBurgerMenu();
   }
 
-  menuLinks.forEach(menuLink => {
+  menuLinks.forEach((menuLink) => {
     menuLink.addEventListener('click', smoothScroll);
   });
 
   // Modal
 
   const modal = document.querySelector('.modal'),
-        modalText = modal.querySelector('.modal__text');
+    modalText = modal.querySelector('.modal__text');
 
   function openModal(text) {
     document.body.style.overflow = 'hidden';
@@ -114,13 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.classList.remove('modal--show');
   }
 
-  modal.addEventListener('click', e => {
+  modal.addEventListener('click', (e) => {
     if (e.target) {
       closeModal();
     }
   });
 
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', (e) => {
     if (e.code === 'Escape') {
       closeModal();
     }
@@ -142,19 +145,18 @@ document.addEventListener('DOMContentLoaded', () => {
       form.classList.add('--sending');
       let response = await fetch('sendmail.php', {
         method: 'POST',
-        body: formData
+        body: formData,
       });
 
       if (response.ok) {
         let result = await response.json();
-        openModal('Спасибо. Ваше сообщение отправлено.');
+        openModal(result.message);
         form.reset();
         form.classList.remove('--sending');
       } else {
         openModal('Ошибка. Попробуйте снова.');
         form.classList.remove('--sending');
       }
-
     } else {
       openModal('Заполните все поля');
     }
@@ -197,33 +199,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function getData() {
     fetch('../quizdata.json')
-      .then(res => res.json())
-      .then(loadedQuizData => {
+      .then((res) => res.json())
+      .then((loadedQuizData) => {
         quizData = loadedQuizData;
         loadQuiz();
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-        openModal('Ошибка при загрузке данных. Попробуйте позже.')
+        openModal('Ошибка при загрузке данных. Попробуйте позже.');
       });
   }
 
   const answerElms = document.querySelectorAll('.quiz__answer'),
-        quizBoxHeader = document.querySelector('.quiz__box-header'),
-        questionEl = document.querySelector('.quiz__question'),
-        answerA = document.querySelector('.quiz__text-a'),
-        answerB = document.querySelector('.quiz__text-b'),
-        answerC = document.querySelector('.quiz__text-c'),
-        answerD = document.querySelector('.quiz__text-d'),
-        submitButton = document.querySelector('.quiz__btn'),
-        quizPagination = document.querySelector('.quiz__pagination'),
-        quizCloseCross = document.querySelector('.quiz__close-cross'),
-        quizCloseButton = document.querySelector('.quiz__close-btn'),
-        quizStartButton = document.querySelector('.header__btn'),
-        quizContent = document.querySelector('.quiz');
+    quizBoxHeader = document.querySelector('.quiz__box-header'),
+    questionEl = document.querySelector('.quiz__question'),
+    answerA = document.querySelector('.quiz__text-a'),
+    answerB = document.querySelector('.quiz__text-b'),
+    answerC = document.querySelector('.quiz__text-c'),
+    answerD = document.querySelector('.quiz__text-d'),
+    submitButton = document.querySelector('.quiz__btn'),
+    quizPagination = document.querySelector('.quiz__pagination'),
+    quizCloseCross = document.querySelector('.quiz__close-cross'),
+    quizCloseButton = document.querySelector('.quiz__close-btn'),
+    quizStartButton = document.querySelector('.header__btn'),
+    quizContent = document.querySelector('.quiz');
 
   let currentQuiz = 0,
-      score = 0;
+    score = 0;
 
   function loadQuiz() {
     showQuiz();
@@ -243,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function getSelectedAnswers() {
     let answer;
 
-    answerElms.forEach(answerElm => {
+    answerElms.forEach((answerElm) => {
       if (answerElm.checked) {
         answer = answerElm.classList.item(2);
       }
@@ -253,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function deselectAnswers() {
-    answerElms.forEach(answerElm => {
+    answerElms.forEach((answerElm) => {
       answerElm.checked = false;
     });
   }
@@ -292,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break;
     }
   }
-  
+
   function closeQuiz() {
     quizContent.classList.remove('quiz--open');
     document.body.classList.remove('quiz--lock');
