@@ -37,7 +37,9 @@ function formValidate(form) {
     const input = formReq[index];
     formRemoveError(input);
 
-    if (input.classList.contains('contacts__form-input--email')) {
+    const isContains = input.classList.contains('contacts__form-input--email');
+
+    if (isContains) {
       if (emailTest(input)) {
         formAddError(input);
         error++;

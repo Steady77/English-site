@@ -6,8 +6,9 @@ export function smoothScroll(event) {
   event.preventDefault();
 
   const target = event.target;
+  const isMatches = target.matches('.menu__list-link');
 
-  if (target.matches('.menu__list-link')) {
+  if (isMatches) {
     let start = 0;
 
     const pageY = window.pageYOffset;
