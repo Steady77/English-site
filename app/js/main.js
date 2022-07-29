@@ -1,7 +1,8 @@
 import AOS from 'aos';
 import { hideBurgerMenu, toggleBurgerMenu } from './burgerMenu';
 import { formSend } from './form';
-import { closeModal, openModal } from './modal';
+import { closeModal } from './modal';
+import { quiz } from './quiz';
 import { smoothScroll } from './smoothScroll';
 import { initSwiper } from './swiperSettings';
 import { UI_ELEMENTS } from './view';
@@ -11,18 +12,11 @@ AOS.init({
 });
 
 initSwiper();
+quiz();
 
 if (UI_ELEMENTS.MENU_BUTTON) {
   UI_ELEMENTS.MENU_BUTTON.addEventListener('click', toggleBurgerMenu);
 }
-
-document.body.addEventListener('click', (e) => {
-  const target = e.target;
-
-  if (!target.closest('.menu')) {
-    hideBurgerMenu();
-  }
-});
 
 UI_ELEMENTS.MENU_LINKS.forEach((menuLink) => {
   menuLink.addEventListener('click', smoothScroll);
@@ -34,144 +28,18 @@ UI_ELEMENTS.MODAL_WINDOW.addEventListener('click', (e) => {
   }
 });
 
-document.addEventListener('keydown', (e) => {
+UI_ELEMENTS.FORM.addEventListener('submit', formSend);
+
+document.body.addEventListener('keydown', (e) => {
   if (e.code === 'Escape') {
     closeModal();
   }
 });
 
-UI_ELEMENTS.FORM.addEventListener('submit', formSend);
+document.body.addEventListener('click', (e) => {
+  const target = e.target;
 
-// Quiz
-
-let quizData = [];
-
-function getData() {
-  fetch('../quizdata.json')
-    .then((res) => res.json())
-    .then((loadedQuizData) => {
-      quizData = loadedQuizData;
-      loadQuiz();
-    })
-    .catch((err) => {
-      console.error(err);
-      openModal('Ошибка при загрузке данных. Попробуйте позже.');
-    });
-}
-
-const answerElms = document.querySelectorAll('.quiz__answer'),
-  quizBoxHeader = document.querySelector('.quiz__box-header'),
-  questionEl = document.querySelector('.quiz__question'),
-  answerA = document.querySelector('.quiz__text-a'),
-  answerB = document.querySelector('.quiz__text-b'),
-  answerC = document.querySelector('.quiz__text-c'),
-  answerD = document.querySelector('.quiz__text-d'),
-  submitButton = document.querySelector('.quiz__btn'),
-  quizPagination = document.querySelector('.quiz__pagination'),
-  quizCloseCross = document.querySelector('.quiz__close-cross'),
-  quizCloseButton = document.querySelector('.quiz__close-btn'),
-  quizStartButton = document.querySelector('.header__btn'),
-  quizContent = document.querySelector('.quiz');
-
-let currentQuiz = 0,
-  score = 0;
-
-function loadQuiz() {
-  showQuiz();
-  deselectAnswers();
-
-  quizPagination.textContent = `${currentQuiz + 1}/50`;
-
-  const currentQuizData = quizData[currentQuiz];
-
-  questionEl.innerHTML = currentQuizData.question;
-  answerA.textContent = currentQuizData.a;
-  answerB.textContent = currentQuizData.b;
-  answerC.textContent = currentQuizData.c;
-  answerD.textContent = currentQuizData.d;
-}
-
-function getSelectedAnswers() {
-  let answer;
-
-  answerElms.forEach((answerElm) => {
-    if (answerElm.checked) {
-      answer = answerElm.classList.item(2);
-    }
-  });
-
-  return answer;
-}
-
-function deselectAnswers() {
-  answerElms.forEach((answerElm) => {
-    answerElm.checked = false;
-  });
-}
-
-function changeButtonsVisibility() {
-  submitButton.style.display = 'none';
-  quizCloseButton.style.display = 'block';
-}
-
-function showResultText(result, level) {
-  quizBoxHeader.innerHTML = `
-      <h2 style="text-align: center; padding: 20px;">Ваш результат ${result} из 50 <br>
-      Рекомендуемый уровень: ${level}</h2>
-    `;
-}
-
-function getScore(result) {
-  switch (true) {
-    case result >= 0 && result <= 20:
-      showResultText(result, 'Elementary');
-      changeButtonsVisibility();
-      break;
-    case result >= 21 && result <= 30:
-      showResultText(result, 'Pre-Intermediate');
-      changeButtonsVisibility();
-      break;
-    case result >= 31 && result <= 40:
-      showResultText(result, 'Intermediate');
-      changeButtonsVisibility();
-      break;
-    case result >= 41 && result <= 50:
-      showResultText(result, 'Upper-Intermediate');
-      changeButtonsVisibility();
-      break;
-    default:
-      break;
-  }
-}
-
-function closeQuiz() {
-  quizContent.classList.remove('quiz--open');
-  document.body.classList.remove('quiz--lock');
-  location.reload();
-}
-
-function showQuiz() {
-  quizContent.classList.add('quiz--open');
-  document.body.classList.add('quiz--lock');
-}
-
-submitButton.addEventListener('click', () => {
-  const answer = getSelectedAnswers();
-
-  if (answer) {
-    if (answer === quizData[currentQuiz].correct) {
-      score++;
-    }
-
-    currentQuiz++;
-    if (currentQuiz < quizData.length) {
-      loadQuiz();
-    } else {
-      getScore(score);
-    }
+  if (!target.closest('.menu')) {
+    hideBurgerMenu();
   }
 });
-
-quizStartButton.addEventListener('click', getData);
-quizCloseCross.addEventListener('click', closeQuiz);
-quizCloseButton.addEventListener('click', closeQuiz);
