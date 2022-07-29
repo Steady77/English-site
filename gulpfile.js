@@ -29,7 +29,7 @@ function scripts() {
         output: {
           filename: 'main.min.js',
         },
-      })
+      }),
     )
     .pipe(dest('app/js'))
     .pipe(browserSync.stream());
@@ -42,7 +42,7 @@ function styles() {
     .pipe(
       autoprefixer({
         grid: true,
-      })
+      }),
     )
     .pipe(dest('app/css'))
     .pipe(browserSync.stream());
@@ -58,7 +58,7 @@ function images() {
         imagemin.svgo({
           plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
         }),
-      ])
+      ]),
     )
     .pipe(dest('dist/images'));
 }
@@ -70,10 +70,11 @@ function build() {
       'app/fonts/**/*',
       'app/js/main.min.js',
       'app/*.html',
-      'app/phpmailer',
+      'app/phpmailer/**/*',
       'app/sendmail.php',
+      'app/quizdata.json',
     ],
-    { base: 'app' }
+    { base: 'app' },
   ).pipe(dest('dist'));
 }
 
